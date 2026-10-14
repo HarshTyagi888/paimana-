@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pargati path | AI Project Monitoring</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+<div class="logo"><div class="logo-icon">P</div><div><h2>PAIMANA</h2><span>AI Project Monitoring</span></div></div>
+<nav>
+<button class="nav-item active" data-page="dashboard"><span>🏠</span>Dashboard</button>
+<button class="nav-item" data-page="analytics"><span>📊</span>Project Analytics</button>
+<button class="nav-item" data-page="risk"><span>🚨</span>Risk & Alerts</button>
+<button class="nav-item" data-page="projects"><span>📁</span>Projects</button>
+<button class="nav-item" data-page="predictions"><span>📈</span>Predictions</button>
+<button class="nav-item" data-page="assistant"><span>🤖</span>AI Assistant</button>
+</nav>
+<div class="sidebar-bottom">
+<div class="system-status"><span class="status-dot"></span>System Online</div>
+<div class="user-box"><div class="avatar">MO</div><div><strong>Monitoring Officer</strong><small>MoSPI</small></div></div>
+</div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+<button class="menu-btn" id="menuBtn">☰</button>
+<div><h1 id="pageTitle">Project Monitoring Dashboard</h1><p>Infrastructure & Project Monitoring Division · MoSPI</p></div>
+<div class="top-actions"><button class="notification-btn" id="notificationBtn">🔔<span class="notification-count">4</span></button><div class="date-box">📅 <span id="currentDate"></span></div></div>
+</header>
+
+<section class="content">
+
+<div class="page active-page" id="dashboard">
+<div class="welcome"><div><h2>Infrastructure Monitoring Overview</h2><p>AI-powered monitoring of central sector infrastructure projects.</p></div><button class="primary-btn" onclick="refreshDashboard()">↻ Refresh Data</button></div>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-icon blue">📁</div><div><span>Total Projects</span><h3>1,981</h3><small>Across 17 Ministries</small></div></div>
+<div class="stat-card"><div class="stat-icon purple">💰</div><div><span>Original Cost</span><h3>₹37.13 L Cr</h3><small>Approved project cost</small></div></div>
+<div class="stat-card"><div class="stat-icon orange">📈</div><div><span>Revised Cost</span><h3>₹42.78 L Cr</h3><small class="danger-text">+15.2% escalation</small></div></div>
+<div class="stat-card"><div class="stat-icon green">💳</div><div><span>Expenditure</span><h3>₹20.36 L Cr</h3><small>53.8% of original cost</small></div></div>
+</div>
+<div class="section-title"><div><h2>AI Risk Overview</h2><p>Machine-learning based project risk classification</p></div></div>
+<div class="risk-grid">
+<div class="risk-card high"><div class="risk-number">186</div><div><strong>High Risk</strong><span>Immediate attention</span></div><div class="risk-percent">9.4%</div></div>
+<div class="risk-card medium"><div class="risk-number">421</div><div><strong>Medium Risk</strong><span>Requires monitoring</span></div><div class="risk-percent">21.3%</div></div>
+<div class="risk-card low"><div class="risk-number">1,374</div><div><strong>Low Risk</strong><span>Normal monitoring</span></div><div class="risk-percent">69.3%</div></div>
+</div>
+<div class="dashboard-grid">
+<div class="panel chart-panel"><div class="panel-header"><div><h3>Project Risk Distribution</h3><p>Current portfolio risk classification</p></div></div><canvas id="riskChart"></canvas></div>
+<div class="panel"><div class="panel-header"><div><h3>Early Warning Alerts</h3><p>Projects requiring attention</p></div><button class="text-btn" onclick="showPage('risk')">View All</button></div>
+<div class="alert-list">
+<div class="alert-item critical"><div class="alert-icon">!</div><div><strong>Cost Overrun Risk</strong><p>High probability detected in Highway Project A.</p></div><span>High</span></div>
+<div class="alert-item warning"><div class="alert-icon">!</div><div><strong>Schedule Delay</strong><p>Milestone completion is behind schedule.</p></div><span>Medium</span></div>
+<div class="alert-item warning"><div class="alert-icon">!</div><div><strong>Expenditure Trend</strong><p>Unexpected expenditure pattern detected.</p></div><span>Medium</span></div>
+<div class="alert-item info"><div class="alert-icon">i</div><div><strong>Milestone Update</strong><p>Project milestone requires verification.</p></div><span>Low</span></div>
+</div></div></div>
+<div class="panel"><div class="panel-header"><div><h3>Sector-wise Project Performance</h3><p>Projects monitored across infrastructure sectors</p></div></div><canvas id="sectorChart"></canvas></div>
+<div class="panel"><div class="panel-header"><div><h3>Projects Requiring Immediate Attention</h3><p>AI-generated high-risk projects</p></div><button class="text-btn" onclick="showPage('projects')">View Projects</button></div><div class="table-container"><table><thead><tr><th>Project</th><th>Ministry</th><th>Sector</th><th>Cost Risk</th><th>Delay Risk</th><th>Overall Risk</th><th>Status</th></tr></thead><tbody id="riskProjectTable"></tbody></table></div></div>
+</div>
+
+<div class="page" id="analytics">
+<div class="page-heading"><div><h2>Project Analytics</h2><p>Historical and current infrastructure project performance</p></div></div>
+<div class="analytics-grid">
+<div class="panel"><div class="panel-header"><div><h3>Original vs Revised Cost</h3><p>Cost escalation across sectors</p></div></div><canvas id="costChart"></canvas></div>
+<div class="panel"><div class="panel-header"><div><h3>Planned vs Actual Progress</h3><p>Implementation progress comparison</p></div></div><canvas id="progressChart"></canvas></div>
+</div>
+<div class="panel"><div class="panel-header"><div><h3>Monthly Project Performance</h3><p>Monitoring trends</p></div></div><canvas id="monthlyChart"></canvas></div>
+</div>
+
+<div class="page" id="risk">
+<div class="page-heading"><div><h2>Risk & Early Warning System</h2><p>AI-generated alerts for potential cost, schedule and implementation risks.</p></div></div>
+<div class="filter-bar"><select id="riskFilter"><option value="all">All Risk Levels</option><option value="high">High Risk</option><option value="medium">Medium Risk</option><option value="low">Low Risk</option></select><select><option>All Sectors</option><option>Transport</option><option>Energy</option><option>Water</option><option>Communication</option></select><button class="primary-btn" onclick="filterRisks()">Apply Filter</button></div>
+<div id="riskAlertContainer"></div>
+</div>
+
+<div class="page" id="projects">
+<div class="page-heading"><div><h2>Infrastructure Projects</h2><p>Project-level monitoring information</p></div><button class="primary-btn">+ Add Project</button></div>
+<div class="search-bar"><input type="text" id="projectSearch" placeholder="Search project, ministry or sector..."><button onclick="searchProjects()">🔍 Search</button></div>
+<div class="panel"><div class="table-container"><table><thead><tr><th>Project</th><th>Ministry</th><th>Sector</th><th>Approved Cost</th><th>Expenditure</th><th>Progress</th><th>Risk</th><th>Action</th></tr></thead><tbody id="projectTable"></tbody></table></div></div>
+</div>
+
+<div class="page" id="predictions">
+<div class="page-heading"><div><h2>AI Predictions</h2><p>Machine learning predictions for cost escalation and schedule delays.</p></div></div>
+<div class="prediction-grid">
+<div class="prediction-card"><div class="prediction-header"><span>💰</span><h3>Cost Overrun Prediction</h3></div><h1>18.7%</h1><p>Average predicted cost escalation for high-risk projects.</p><div class="progress"><div style="width:74%"></div></div><small>Model confidence: 91%</small></div>
+<div class="prediction-card"><div class="prediction-header"><span>⏱️</span><h3>Time Overrun Prediction</h3></div><h1>7.4 Months</h1><p>Average expected schedule delay among high-risk projects.</p><div class="progress"><div style="width:68%"></div></div><small>Model confidence: 87%</small></div>
+<div class="prediction-card"><div class="prediction-header"><span>🎯</span><h3>Risk Prediction Accuracy</h3></div><h1>89.2%</h1><p>Current validation accuracy of the project risk model.</p><div class="progress"><div style="width:89%"></div></div><small>Random Forest model</small></div>
+</div>
+<div class="panel"><div class="panel-header"><div><h3>Top Predicted High-Risk Projects</h3><p>Projects with highest predicted intervention probability</p></div></div><div class="table-container"><table><thead><tr><th>Project</th><th>Predicted Cost Overrun</th><th>Predicted Delay</th><th>Risk Score</th><th>Recommendation</th></tr></thead><tbody>
+<tr><td>National Highway Development</td><td>24.8%</td><td>11 months</td><td><span class="risk-badge high">86</span></td><td>Immediate review</td></tr>
+<tr><td>Metro Infrastructure Project</td><td>19.6%</td><td>8 months</td><td><span class="risk-badge high">81</span></td><td>Schedule intervention</td></tr>
+<tr><td>River Water Management</td><td>14.2%</td><td>6 months</td><td><span class="risk-badge medium">68</span></td><td>Increase monitoring</td></tr>
+</tbody></table></div></div>
+</div>
+
+<div class="page" id="assistant">
+<div class="page-heading"><div><h2>AI Project Intelligence Assistant</h2><p>Ask questions about infrastructure projects, risks and predictions.</p></div></div>
+<div class="assistant-container">
+<div class="assistant-header"><div class="ai-avatar">🤖</div><div><h3>PAIMANA AI Assistant</h3><span>● Online · Project Intelligence System</span></div></div>
+<div class="chat-area" id="chatArea"><div class="chat-message bot"><div class="chat-avatar">🤖</div><div class="message"><strong>PAIMANA AI</strong><p>Hello! I can help you analyse infrastructure projects. You can ask me about cost overruns, delays, project risks and sector performance.</p></div></div></div>
+<div class="suggestions"><button onclick="askSuggestion('Which projects are high risk?')">High-risk projects</button><button onclick="askSuggestion('Which sector has the highest cost overrun?')">Cost overrun analysis</button><button onclick="askSuggestion('Show projects with major delays')">Delay analysis</button></div>
+<div class="chat-input"><input type="text" id="chatInput" placeholder="Ask PAIMANA AI..."><button id="sendBtn">➤</button></div>
+</div>
+</div>
+</section>
+</main>
+</div>
+
+<div class="modal" id="projectModal"><div class="modal-content"><button class="modal-close" onclick="closeModal()">×</button><h2 id="modalProjectName">Project Details</h2><div class="modal-grid"><div><span>Ministry</span><strong id="modalMinistry"></strong></div><div><span>Sector</span><strong id="modalSector"></strong></div><div><span>Approved Cost</span><strong id="modalCost"></strong></div><div><span>Expenditure</span><strong id="modalExpenditure"></strong></div><div><span>Physical Progress</span><strong id="modalProgress"></strong></div><div><span>Risk Score</span><strong id="modalRisk"></strong></div></div><div class="ai-analysis"><h3>🤖 AI Analysis</h3><p id="modalAnalysis">Loading AI analysis...</p></div></div></div>
+<div class="toast" id="toast">Data refreshed successfully</div>
+<script src="script.js"></script>
+</body>
+</html>
